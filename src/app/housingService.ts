@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HousingLocationInfo } from './housinglocation';
-
+import axios from 'axios'; //1. Importar axios en el servicio.  
 @Injectable({
   providedIn: 'root'
 })
@@ -110,6 +110,7 @@ export class HousingService {
       }
   ]
   */
+ 
   url = 'http://localhost:3000/locations';
 
   /*
@@ -123,6 +124,11 @@ export class HousingService {
     return this.housingLocationList.find((housingLocation) => housingLocation.id === id);
   }
   */
+
+  //2. Funcion para llamar endpoint o URL de la API con AXIOS:
+  traerDatosAxios(){
+    return axios.get(this.url)
+  }
   
   async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
     const data = await fetch(this.url);

@@ -27,21 +27,29 @@ import { HousingService } from '../housingService';
 
 export class Home {
   housingLocationList: HousingLocationInfo[] = [];
-  housingService: HousingService = inject(HousingService);
+  //housingService: HousingService = inject(HousingService);
 
   filteredLocationList: HousingLocationInfo[] = [];
 
-  constructor() {
+  constructor(housingService: HousingService) {
     /* SYNCRONIC VERSIOOOON!!!!!
     this.housingLocationList = this.housingService.getAllHousingLocations();
     this.filteredLocationList = this.housingLocationList;  
 
     ASYNC:
     server now reading data from the HTTP request, and components rely on the service 
-    */
+    
     this.housingService.getAllHousingLocations().then((housingLocationList: HousingLocationInfo[]) => {
         this.housingLocationList = housingLocationList;
         this.filteredLocationList = housingLocationList;
+      });*/
+
+     this.housingService.traerDatosAxios().then(response=> {
+        this.housingLocationList = response.data; //Se reciben los datos
+        this.filteredLocationList = this.housingLocationList;
+      }).catch((error) => { console.log(error)})
+      .finally(()=>{
+        console.log('termina de llamar el API');
       });
   }
 
