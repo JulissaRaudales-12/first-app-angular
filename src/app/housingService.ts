@@ -111,7 +111,10 @@ export class HousingService {
   ]
   */
  
-  url = 'http://localhost:3000/locations';
+  //url = 'http://localhost:3000/locations';
+
+  url = 'http://localhost:5285/api/HousingLocation/'; //URL del endpoint de la API creada en .NET Core
+
 
   /*
   //functions:
@@ -127,9 +130,10 @@ export class HousingService {
 
   //2. Funcion para llamar endpoint o URL de la API con AXIOS:
   traerDatosAxios(){
-    return axios.get(this.url)
+    return axios.get(this.url+'locations')
   }
   
+ 
   async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
     const data = await fetch(this.url);
     return (await data.json()) ?? [];
@@ -140,6 +144,11 @@ export class HousingService {
     const locationJson = await data.json();
     return locationJson[0] ?? {};
   }
+
+  getHousingLocationsByIdAxios(id: number){
+    return axios.get(`${this.url}?id=${id}`)
+  }
+   
 
   //Method:
   submitApplication(firstName: string, lastName: string, email: string) {

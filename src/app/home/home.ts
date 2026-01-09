@@ -27,7 +27,7 @@ import { HousingService } from '../housingService';
 
 export class Home {
   housingLocationList: HousingLocationInfo[] = [];
-  //housingService: HousingService = inject(HousingService);
+  housingService: HousingService = inject(HousingService);
 
   filteredLocationList: HousingLocationInfo[] = [];
 
@@ -43,7 +43,8 @@ export class Home {
         this.housingLocationList = housingLocationList;
         this.filteredLocationList = housingLocationList;
       });*/
-
+        
+      //this.housingService.getAllHousingLocations().then(response=> {
      this.housingService.traerDatosAxios().then(response=> {
         this.housingLocationList = response.data; //Se reciben los datos
         this.filteredLocationList = this.housingLocationList;

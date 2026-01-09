@@ -25,6 +25,7 @@
     "@angular/cli": "^20.2.0-next",
     "@angular/compiler-cli": "^20.2.0-next",
     "@types/node": "^16.11.35",
+    "baseline-browser-mapping": "^2.9.12",
     "ts-node": "~10.9.0",
     "typescript": "~5.8.0"
   }

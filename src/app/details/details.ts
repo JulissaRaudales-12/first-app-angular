@@ -67,5 +67,12 @@ export class Details {
     this.housingLocation = housingLocation;
     });
    }
-
+   
+/*
+   this.housingService.getHousingLocationByIdAxios(id).then(response=> {
+        this.housingLocation = response.data?.[0];
+    }).catch(error => {
+      console.error('Error al obtener la ubicación:', error);
+    });
+*/
 }
