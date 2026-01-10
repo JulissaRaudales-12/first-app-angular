@@ -113,7 +113,7 @@ export class HousingService {
  
   //url = 'http://localhost:3000/locations';
 
-  url = 'http://localhost:5285/api/HousingLocation/'; //URL del endpoint de la API creada en .NET Core
+  url = 'http://localhost:5285/api/'; //URL del endpoint de la API creada en .NET Core
 
 
   /*
@@ -130,7 +130,7 @@ export class HousingService {
 
   //2. Funcion para llamar endpoint o URL de la API con AXIOS:
   traerDatosAxios(){
-    return axios.get(this.url+'locations')
+    return axios.get(this.url+'Location')
   }
   
  
