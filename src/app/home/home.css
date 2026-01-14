@@ -39,3 +39,30 @@ button {
       grid-template-columns: 1fr;
   }    
 }
+
+
+.search-section {
+  display: flex;
+  flex-direction: column; /* Apila el formulario y luego la zona de agregar */
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.add-action-wrapper {
+  display: flex;
+  justify-content: flex-end; /* Empuja el botón totalmente a la derecha */
+  width: 100%;
+}
+
+.add-button {
+  align-self: flex-end; /* Esta es la clave: se empuja a sí mismo a la derecha */
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+

@@ -1,8 +1,15 @@
 {
+<<<<<<< HEAD
   "hash": "dd3ad0a2",
   "configHash": "e3eb48ef",
   "lockfileHash": "e3c2e484",
   "browserHash": "b381866d",
+=======
+  "hash": "5339e4d5",
+  "configHash": "b984686b",
+  "lockfileHash": "f44f99e7",
+  "browserHash": "b8e34136",
+>>>>>>> f5658250 (addLocation component)
   "optimized": {},
   "chunks": {}
 }

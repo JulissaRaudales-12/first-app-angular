@@ -16,6 +16,7 @@
     "@angular/platform-browser": "^20.2.0-next",
     "@angular/router": "^20.2.0-next",
     "axios": "^1.13.2",
+    "json-server": "^1.0.0-beta.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -28,5 +29,18 @@
     "baseline-browser-mapping": "^2.9.12",
     "ts-node": "~10.9.0",
     "typescript": "~5.8.0"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulissaRaudales-12/first-app-angular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulissaRaudales-12/first-app-angular/issues"
+  },
+  "homepage": "https://github.com/JulissaRaudales-12/first-app-angular#readme"
 }

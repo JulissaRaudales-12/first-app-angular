@@ -28,3 +28,37 @@ section.listing a::after {
   content: "\203A";
   margin-left: 5px;
 }
+
+
+/* Contenedor para alinear el link y el botón */
+.listing-footer {
+  display: flex;
+  justify-content: space-between; /* Empuja el link a la izquierda y el botón a la derecha */
+  align-items: center;           /* Los alinea verticalmente */
+  padding: 0 20px;               /* Mantiene el margen lateral de 20px igual que el resto */
+}
+
+/* Estilo del botón de eliminar */
+.delete-button {
+  background-color: transparent;
+  color: #ff4d4d;                /* Color rojo para advertir acción de borrado */
+  border: 1px solid #ff4d4d;
+  padding: 5px 15px;
+  border-radius: 20px;           /* Bordes redondeados para seguir la estética */
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+/* Ajuste opcional: quitamos el padding-left al link si el contenedor ya tiene padding */
+section.listing a {
+  padding-left: 0; 
+  text-decoration: none;
+  color: var(--primary-color);
+}

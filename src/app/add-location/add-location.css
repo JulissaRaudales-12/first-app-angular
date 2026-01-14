@@ -1,0 +1,84 @@
+/* Contenedor principal del formulario siguiendo el estilo .listing */
+.add-form-container {
+  background: var(--accent-color);
+  border-radius: 30px;
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #e0e0e0; /* Un borde suave para diferenciarlo */
+}
+
+.form-heading {
+  color: var(--primary-color);
+  font-family: inherit;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+/* Grupo de controles para espaciado uniforme */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+/* Inputs con bordes redondeados consistentes */
+input[type="text"],
+input[type="url"],
+input[type="number"] {
+  border: 1px solid var(--primary-color);
+  padding: 12px 20px;
+  border-radius: 20px; /* Siguiendo la estética de los botones */
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Estilo para la sección de checkboxes */
+.checkbox-row {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* Botón de envío que imita el estilo de botones de la app */
+.submit-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: transform 0.2s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
