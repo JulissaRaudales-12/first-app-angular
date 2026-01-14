@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HousingLocationInfo } from './housinglocation';
-import axios from 'axios'; //1. Importar axios en el servicio.  
+import { HousingLocationInfo } from './housinglocation';  
+import axios from 'axios';
 import { Observable, from } from 'rxjs';
 
 
@@ -133,6 +133,10 @@ export class HousingService {
   traerDatosAxios(){
     return axios.get(this.url+'Location')
   }
+
+  /*async traerDatosAxios(): Promise<AxiosResponse<HousingLocationInfo[]>> {
+  return axios.get<HousingLocationInfo[]>(this.url+'Location');
+}*/
 
   eliminarDatoAxios(id: number) {
   // Retornamos la promesa de axios directamente

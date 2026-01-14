@@ -6,7 +6,7 @@ import { RouterModule, RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   //[Home..]
-  imports: [RouterModule, RouterLink, RouterOutlet],
+  imports: [RouterModule, RouterOutlet], //RouterLink
   template: `
     <main>
     <!--a [routerLink]="['/details', { housingLocation: 'id' }]">Learn More</a-->

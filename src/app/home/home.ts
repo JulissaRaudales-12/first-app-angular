@@ -3,11 +3,11 @@ import { HousingLocation } from '../housing-location/housing-location';
 import { HousingLocationInfo } from '../housinglocation';
 import { CommonModule} from "@angular/common";
 import { HousingService } from '../housingService';
-import { AddLocation} from '../add-location/add-location'
+import { RouterLink} from '@angular/router'
 
 @Component({
   selector: 'app-home',
-  imports: [HousingLocation, CommonModule, AddLocation],
+  imports: [HousingLocation, CommonModule, RouterLink],
   template: `
     <section class="search-section">
       <form>
@@ -16,8 +16,7 @@ import { AddLocation} from '../add-location/add-location'
       </form>
 
       <div class="add-action-wrapper">
-      <button class="add-button" (click)="isFormVisible = !isFormVisible"> {{ isFormVisible ? 'Cancel' : '+ Add New Location' }}</button>
-      <app-add-location (locationCreated)="onNewLocation($any($event))"></app-add-location>
+        <a [routerLink]="['/add']" class="add-button">+ Add New Location</a>
       </div>
     </section>
 
@@ -33,15 +32,13 @@ import { AddLocation} from '../add-location/add-location'
 })
 
 //export class Home implements OnInit { //Estes es PADREEEEE, housing-location es HIJOOOOOOOOOO***************************
-export class Home {
+export class Home implements OnInit{
   housingLocationList: HousingLocationInfo[] = [];
   housingService: HousingService = inject(HousingService);
 
   filteredLocationList: HousingLocationInfo[] = [];
 
-  isFormVisible: boolean = false;
-
-  //constructor() {}
+  constructor() {}
 /*
   ngOnInit(): void {
     this.housingService.getAllHousingLocations().subscribe({
@@ -68,7 +65,7 @@ export class Home {
 
 //}
 
-  constructor(housingService: HousingService) {
+  //constructor(housingService: HousingService) {}
     /* SYNCRONIC VERSIOOOON!!!!!
     this.housingLocationList = this.housingService.getAllHousingLocations();
     this.filteredLocationList = this.housingLocationList;  
@@ -82,14 +79,16 @@ export class Home {
       });*/
     
       // LOGICA DENTRO DEL CONSTRUCTOR
-     this.housingService.traerDatosAxios().then(response=> {
-        this.housingLocationList = response.data; //Se reciben los datos
-        this.filteredLocationList = this.housingLocationList;
-      }).catch((error) => { console.log(error)})
-      .finally(()=>{
-        console.log('termina de llamar el API');
-      });
-  }
+    
+    ngOnInit(): void {
+      this.housingService.traerDatosAxios().then(response=> {
+          this.housingLocationList = response.data; //Se reciben los datos
+          this.filteredLocationList = this.housingLocationList;
+        }).catch((error) => { console.log(error)})
+        .finally(()=>{
+          console.log('termina de llamar el API');
+        });
+    }
 
   filterResults(text: string) {
     if (!text) {
@@ -101,24 +100,22 @@ export class Home {
     );
   }  
 
-
-
   actualizarLista(id: number) {
   // 1. Actualizamos 
-  this.housingLocationList = this.housingLocationList.filter(
-    (item) => item.id !== id
-  );
+    this.housingLocationList = this.housingLocationList.filter(
+      (item) => item.id !== id
+    );
 
-  // REUTILIZACIÓN: En lugar de escribir otro filter, simplemente vuelve a ejecutar tu buscador con el texto que ya había.
-  // Si no hay texto, pasamos un string vacío para que muestre todo lo que queda.
-  this.filterResults(''); 
+    // REUTILIZACIÓN: En lugar de escribir otro filter, simplemente vuelve a ejecutar tu buscador con el texto que ya había.
+    // Si no hay texto, pasamos un string vacío para que muestre todo lo que queda.
+    this.filterResults(''); 
   }
 
   onNewLocation(newLocation: HousingLocationInfo) {
   // Añadimos el nuevo objeto al inicio de los arreglos
-  this.housingLocationList = [newLocation, ...this.housingLocationList];
-  this.filteredLocationList = [newLocation, ...this.filteredLocationList];
+    this.housingLocationList = [newLocation, ...this.housingLocationList];
+    this.filteredLocationList = [newLocation, ...this.filteredLocationList];
   }
-
 }
+
 

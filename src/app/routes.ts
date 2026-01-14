@@ -3,6 +3,7 @@
 import {Routes} from '@angular/router';
 import {Home} from './home/home';   
 import {Details} from './details/details';
+import { AddLocation } from './add-location/add-location';
 
 const routeConfig: Routes = [
   {
@@ -15,6 +16,11 @@ const routeConfig: Routes = [
     component: Details,
     title: 'Home details',
   },
+  {
+    path: 'add',
+    component: AddLocation,
+    title: 'Add new location',
+  }
 ];
 
 export default routeConfig;

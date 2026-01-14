@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HousingLocationInfo } from '../housinglocation';
 import { HousingService } from '../housingService';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-add-location',
@@ -16,43 +17,37 @@ export class AddLocation implements OnInit {
   // Importante añadir <HousingLocationInfo>
   @Output() locationCreated = new EventEmitter<HousingLocationInfo>();
 
-  postForm: FormGroup = new FormGroup({});
+  dataToSendForm: FormGroup = new FormGroup({});
 
-  constructor(private nuevaCasa: HousingService, private builder: FormBuilder) { }
+  constructor(private nuevaCasa: HousingService, private builder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.postForm = this.builder.group({
+    this.dataToSendForm = this.builder.group({
+      id: [0, [Validators.required, Validators.min(0)]],
       name: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
       photo: [''],
-      availableUnits: [1],
+      availableUnits: [1, [Validators.required, Validators.min(0)]],
       wifi: [false],
       laundry: [false]
     });
   }
 
   async Onsubmit() {
-  if (this.postForm.invalid) {
+  if (this.dataToSendForm.invalid) {
       alert('Formulario inválido');
       return;
     }
 
-  // 1. Quitamos el ID para que la base de datos cree uno nuevo
-  const { id, ...dataToSend } = this.postForm.value;
+  // Enviamos el value completo (incluyendo el ID que escribió el usuario)
+    const dataToSend = this.dataToSendForm.value;
 
-  try {
-    // 2. Llamamos a tu método del servicio
-    const response = await this.nuevaCasa.crearDatoAxios(dataToSend);
-
-    // 3. Emitimos la respuesta (el objeto que ya tiene el ID del servidor)
-    // Recuerda que en Axios los datos están en la propiedad .data
-    this.locationCreated.emit(response.data);
-
-    // 4. Limpiamos y cerramos
-    this.postForm.reset();
+    try {
+      await this.nuevaCasa.crearDatoAxios(dataToSend);
+      this.router.navigate(['/']);
     } catch (error) {
-      console.error('Error al guardar:', error);
+      console.error('Error:', error);
     }
   }
 

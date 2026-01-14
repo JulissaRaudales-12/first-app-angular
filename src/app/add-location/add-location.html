@@ -1,7 +1,12 @@
 <section class="add-form-container">
     <h2 class="form-heading">Add New Location</h2>
     
-    <form [formGroup]="postForm" (ngSubmit)="Onsubmit()">
+    <form [formGroup]="dataToSendForm" (ngSubmit)="Onsubmit()">
+      <div class="form-group">
+      <label>ID de la Propiedad</label>
+      <input type="number" formControlName="id" placeholder="Ej: 101">
+    </div>
+
       <div class="form-group">
         <label>Name</label>
         <input type="text" formControlName="name" placeholder="Enter name">
@@ -22,6 +27,11 @@
         <input type="url" formControlName="photo" placeholder="https://...">
       </div>
 
+      <div class="form-group">
+        <label>Available Units</label>
+        <input type="number" formControlName="availableUnits" placeholder="Enter available units">
+      </div>
+
       <div class="checkbox-row">
         <label class="checkbox-item">
           <input type="checkbox" formControlName="wifi"> Wifi
@@ -31,7 +41,7 @@
         </label>
       </div>
 
-      <button type="submit" class="submit-button" [disabled]="postForm.invalid">
+      <button type="submit" class="submit-button" [disabled]="dataToSendForm.invalid">
         Save Property
       </button>
     </form>
