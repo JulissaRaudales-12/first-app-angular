@@ -83,7 +83,8 @@ export class Home implements OnInit{
     ngOnInit(): void {
       this.housingService.traerDatosAxios().then(response=> {
           this.housingLocationList = response.data; //Se reciben los datos
-          this.filteredLocationList = this.housingLocationList;
+         // this.filteredLocationList = this.housingLocationList;
+         this.filteredLocationList = [...this.housingLocationList];
         }).catch((error) => { console.log(error)})
         .finally(()=>{
           console.log('termina de llamar el API');
@@ -101,14 +102,16 @@ export class Home implements OnInit{
   }  
 
   actualizarLista(id: number) {
-  // 1. Actualizamos 
+  // 1. Actualizamos- Filtramos la lista principal
     this.housingLocationList = this.housingLocationList.filter(
       (item) => item.id !== id
     );
 
     // REUTILIZACIÓN: En lugar de escribir otro filter, simplemente vuelve a ejecutar tu buscador con el texto que ya había.
     // Si no hay texto, pasamos un string vacío para que muestre todo lo que queda.
-    this.filterResults(''); 
+    //2. Refrescamos la lista filtrada
+    this.filteredLocationList = [...this.housingLocationList];
+    //this.filterResults(''); 
   }
 
   onNewLocation(newLocation: HousingLocationInfo) {
