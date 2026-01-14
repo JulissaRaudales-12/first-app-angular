@@ -1,9 +1,10 @@
-import {Component, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, inject, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router'; // Captura ID de la ruta- extraccion
 import {HousingService } from '../housingService';
 import {HousingLocationInfo} from '../housinglocation';
 import { CommonModule} from '@angular/common';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import axios from 'axios'; //Dispara la peticion.
 
 @Component({
   selector: 'app-details',
@@ -21,7 +22,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
         <p class="listing-location">{{ housingLocation?.city }}, {{ housingLocation?.state }}</p>
       </section>
       <section class="listing-features">
-        <h2 class="section-heading">About this housing location</h2>
+        <h2 class="section-heading">About this Housing Location</h2>
         <ul>
           <li>Units available: {{ housingLocation?.availableUnits }}</li>
           <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
@@ -44,10 +45,12 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
   `,
 styleUrls: ['./details.css'],
 })
-export class Details {
-  route: ActivatedRoute = inject(ActivatedRoute);
+
+export class Details implements OnInit {
+  
+  //route: ActivatedRoute = inject(ActivatedRoute); //Servicio inyectable., 
   housingService: HousingService = inject(HousingService);
-  housingLocation: HousingLocationInfo | undefined;
+  housingLocation: HousingLocationInfo | any; //variable que almacena los datos que pedira al servidor según el ID de la petición. 
 
   applyForm = new FormGroup({
     firstName: new FormControl(''),
@@ -55,24 +58,41 @@ export class Details {
     email: new FormControl(''),
   });
 
-   constructor() {
+   constructor(private route: ActivatedRoute) { }//ARoute: Lee información de donde está el usuario ahora.
     /*SYNC
-    const housingLocationId = Number(this.route.snapshot.params['id']);
+    const housingLocationId = Number(this.route.snapshot.params['id']); //
     this.housingLocation = this.housingService.getHousingLocationById(housingLocationId);
 
     ASYNC:
-    */
+    
     const housingLocationId = parseInt(this.route.snapshot.params['id'], 10);
     this.housingService.getHousingLocationById(housingLocationId).then((housingLocation) => {
     this.housingLocation = housingLocation;
     });
    }
    
-/*
-   this.housingService.getHousingLocationByIdAxios(id).then(response=> {
+*/
+
+  async ngOnInit(){
+    // 1. Obtenemos el ID de la ActivatedRoute
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    // 2. Usamos Axios para traer los datos
+    try{
+      const response = await this.housingService.getHousingLocationByIdAxios(id);
+      this.housingLocation = response.data;
+      } catch (error) {
+        console.error('Error al obtener el detalle:', error);
+      }
+    }
+  }
+
+  /*
+    this.housingService.getHousingLocationByIdAxios(this.housingLocation.id).then(response=> {
         this.housingLocation = response.data?.[0];
     }).catch(error => {
       console.error('Error al obtener la ubicación:', error);
     });
-*/
-}
+  }  */
+
+
