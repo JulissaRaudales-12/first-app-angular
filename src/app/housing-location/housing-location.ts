@@ -6,7 +6,7 @@ import { HousingService } from '../housingService'; // importar el servicio para
 
 
 @Component({
-  selector: 'app-housing-location',
+  selector: 'app-housing-location',//CARD********//DELETE
   imports: [CommonModule, RouterModule],
   template: `
     <section class= "listing">

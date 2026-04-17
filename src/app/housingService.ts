@@ -68,7 +68,11 @@ export class HousingService {
   }
 
   getHousingLocationByIdAxios(id: number){
-    return axios.get(`${this.url}Location/${id}`)
+    return axios.get(`${this.url}Location/${id}`);
+  }
+
+  actualizarDatoAxios(id: number){
+    return axios.put(`${this.url}Location/${id}`);
   }
   
 /*

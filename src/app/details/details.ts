@@ -25,8 +25,8 @@ import axios from 'axios'; //Dispara la peticion.
         <h2 class="section-heading">About this Housing Location</h2>
         <ul>
           <li>Units available: {{ housingLocation?.availableUnits }}</li>
-          <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
-          <li>Does this location have laundry: {{ housingLocation?.laundry }}</li>
+          <li>Does this location have wifi: {{ housingLocation?.wifi ? 'Yes.' : 'No.' }}</li>
+          <li>Does this location have laundry: {{ housingLocation?.laundry ? 'Yes.' : 'No.' }}</li>
         </ul>
       </section>
       <section class="listing-apply">
@@ -80,11 +80,12 @@ export class Details implements OnInit {
     // 2. Usamos Axios para traer los datos
     try{
       const response = await this.housingService.getHousingLocationByIdAxios(id);
-      this.housingLocation = response.data;
+      this.housingLocation = response.data; //? 'yes' : 'no' en el HTML
       } catch (error) {
         console.error('Error al obtener el detalle:', error);
-      }
-    }
+      }  
+    }  
+
   }
 
   /*
